@@ -11,7 +11,7 @@ from app.models import ExtractorRequest, ExtractorResponse
 
 
 # newspaper - can extract html-based websites
-from newspaper import Article
+from newspaper import Article, Config
 
 
 class WebArticleExtractor(BaseExtractor):
@@ -27,7 +27,12 @@ class WebArticleExtractor(BaseExtractor):
 
     def extract(self, request: ExtractorRequest) -> ExtractorResponse:
         try:
-            article = Article(request.url, keep_article_html=True, fetch_images=False)
+            user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+            config = Config()
+            config.browser_user_agent = user_agent
+            article = Article(
+                request.url, keep_article_html=True, fetch_images=False, config=config
+            )
             article.download()
             article.parse()
             # article.nlp()

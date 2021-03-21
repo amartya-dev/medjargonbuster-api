@@ -1,6 +1,6 @@
 {
     "python.formatting.provider": "black",
-    "python.pythonPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "python.pythonPath": "venv/bin/python3",
     "python.testing.pytestArgs": [
         "-s",
         "tests"
